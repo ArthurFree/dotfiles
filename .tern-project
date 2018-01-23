@@ -2,7 +2,9 @@
     "libs": ["ecma6", "browser", "jquery"],
     "plugins": {
         "node": {},
-        "es_modules": {}
+        "es_modules": {},
+        "angular": {},
+        "commonjs": {}
     },
     "ecmaVersion": 6
 }
