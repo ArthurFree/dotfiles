@@ -4,6 +4,74 @@ autocmd BufWritePost $MYVIMRC source $MYVIMRC
 " 定义快捷键的前缀，即<Leader>
 let mapleader=";"
 
+" ===============================================================
+"
+" vim键盘映射
+"
+" vim五种映射
+" 1. 普通模式
+" 2. 可视模式
+" 3. 操作符等待模式
+" 4. 插入模式/替换模式
+" 5. 命令行模式
+"
+" 命令组合前缀
+" nore - 表示非递归的映射
+" n - 表示普通模式下生效
+" v - 表示在可视莫斯下生效
+" i - 表示在插入模式下生效
+" c - 表示在命令行模式下生效
+"
+" 普通模式的映射命令
+" 1. :map {lhs} {rhs}
+"    在:map作用的模式中把键{lhs}映射为{rhs}，{rhs}可进行递归映射
+" 2. :noremap ts td
+"    与:map命令相同，但是{rhs}不能进行递归映射
+" 3. :unmap td
+"    取消:map绑定的{lhs}
+" 4. mapclear
+"    取消所有:map绑定
+"
+" 只用于普通模式的
+" 1. :nmap
+"    :nmap是:map的普通模式版，绑定的键只作用于普通模式
+" 2. :nnoremap
+"    :nnoremap是:nmap的非递归版本
+" 3. :nunmap
+"    :nunmap是取消:nmap的绑定
+" 4. :nmapclear
+"    取消所有:nmap的绑定
+" 
+" {rhs}之前可能显示一个特殊字符
+" * - 表示不可重映射
+" & - 表示仅脚本的局部映射可以被重映射
+" @ - 表示缓冲区的局部映射
+"
+" 键表
+" <k0> - <k9> - 表示小键盘的0-9
+" <S-...> - 表示Shift + 某键
+" <C-...> - 表示Ctrl + 某键
+" <M-...> - 表示Alt/meta + 某键
+" <A-...> - 同<M-...>
+" <Esc> - esc键
+" <Up> - 光标上移键
+" <Space> - 插入空格
+" <Tab> - 插入Tab
+" <CR> - 等于<Enter>
+"
+" <buffer> - 如果映射命令的一个参数是<buffer>，映射将值局限于当前缓冲区内
+" <silent> - 指执行键绑定时不再命令行上回显
+" <special> - 一般用于定义特殊键怕有副作用场合
+" <expr> -
+" 如果定义新映射的第一个参数是<expr>，那么参数会作为表达式来进行计算，结果使用实际使用的
+" <unique> -
+" 一般用于定义新的键映射或缩写命令的同时检查是否该键已经被映射，如果该映射或者缩写已经存在，则该命令会失败
+" <Leader>和mapleader
+" mapleader对所有map映射命令起效，它的作用是将参数<leader>替换成mapleader变量的值
+" 
+" <LocalLeader>和maplocalleader
+" <LocalLeader>和<Leader>相似，只是作用域缓冲区
+" ===============================================================
 " 开启文件类型侦测
 filetype on
 
@@ -75,7 +143,7 @@ set incsearch
 
 " 搜索时大小写不敏感
 set ignorecase
-        
+
 " 关闭兼容模式
 set nocompatible
 
@@ -143,6 +211,14 @@ set nowrap
 
 " 在处理未保存或只读文件的时候，弹出确认
 set confirm
+
+" 设置自动缩进，vim使用自动对齐，也就是把当前行的对齐格式应用到下一行(自动缩进)
+set autoindent
+
+" cindent是特别针对c语言语法的自动缩进
+set cindent
+
+" 依据上面的对齐格式，智能的选择对齐方式，对于类似C语言编写有用
 
 " vundle 环境配置
 filetype off
@@ -212,10 +288,10 @@ Plugin 'sjl/gundo.vim'
 Plugin 'Lokaltog/vim-easymotion'
 
 " 编辑markdown文档，自动开启firefox为你显示markdown最终效果
-Plugin 'suan/vim-instant-markdown'
+"Plugin 'suan/vim-instant-markdown'
 
 " 中/英输入平滑切换
-Plugin 'lilydjwg/fcitx.vim'
+"Plugin 'lilydjwg/fcitx.vim'
 
 " 支持大多数语言代码高亮
 Plugin 'sheerun/vim-polyglot'
@@ -252,6 +328,25 @@ Plugin 'hail2u/vim-css3-syntax'
 
 " 可取代Command-T 但是现在不支持目录忽略
 "Plugin 'junegunn/fzf'
+
+" 调用外部命令行工具来进行代码风格检查
+Plugin 'scrooloose/syntastic'
+
+" 调用外部命令行工具来格式化代码
+Plugin 'Chiel92/vim-autoformat'
+
+" editorConfig
+Plugin 'editorconfig/editorconfig-vim'
+
+" typescript
+"Plugin 'leafgarland/typescript-vim'
+"Plugin ''
+
+" JavaScript函数定义与跳转
+Plugin 'ternjs/tern_for_vim'
+
+" 括号配对
+Plugin 'Raimondi/delimitMate'
 
 " 插件列表结束
 call vundle#end()
@@ -363,7 +458,7 @@ nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
 
 " 查找
 
-" 上下文插件，例如搜素到关键字，中间缩略，展示一段上下文
+" 上下文插件，例如搜索到关键字，中间缩略，展示一段上下文
 " 'dyng/ctrlsf.vim'
 " 使用 ctrlsf.vim 插件在工程内全局查找光标所在关键字，设置快捷键。
 " 快捷键速记法：search in project
@@ -579,3 +674,13 @@ let g:wildfire_objects = ["i'", 'i"', "i)", "i]", "i}", "i>", "ip"]
 " 调用 gundo 树
 nnoremap <Leader>ud :GundoToggle<CR>
 
+" 插件syntastic 配置
+" 将JavaScript Checker设置为eslint
+let g:syntastic_javascript_checkers=['eslint']
+" 使用location list 来导航错误列表
+let g:syntastic_always_popultate_loc_list=1
+
+" 插件vim-autoformat
+" 使用eslint规则进行代码格式化，使用eslint --fix
+let g:formatdef_eslint = '"SRC=eslint-temp-${RANDOM}.js; cat - >$SRC; eslint --fix $SRC >/dev/null 2>&1; cat $SRC | perl -pe \"chomp if eof\"; rm -f $SRC"'
+let g:formatters_javascript = ['eslint']
