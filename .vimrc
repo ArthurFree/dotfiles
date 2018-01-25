@@ -71,7 +71,16 @@ let mapleader=";"
 " 
 " <LocalLeader>和maplocalleader
 " <LocalLeader>和<Leader>相似，只是作用域缓冲区
+"
 " ===============================================================
+"
+" vim下终端使用方法
+" 1. vim -> <C-z> -> terminal, terminal -> fg -> vim
+" 2. vim -> :!    -> terminal, terminal -> <Enter> -> vim
+" 3. tumx
+"
+" ===============================================================
+
 " 开启文件类型侦测
 filetype on
 
@@ -233,7 +242,8 @@ Plugin 'altercation/vim-colors-solarized'
 "Plugin 'tomasr/molokai'
 "Plugin 'vim-scripts/phd'
 Plugin 'Lokaltog/vim-powerline'
-Plugin 'nathanaelkane/vim-indent-guides'
+"Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'Yggdroot/indentLine'
 
 " 书签可视化
 Plugin 'kshenoy/vim-signature'
@@ -361,15 +371,18 @@ let g:Powerline_colorscheme='solarized256'
 " vim-indent-guides
 " 随vim自启动
 "let g:indent_guides_enable_on_vim_startup=1
-
+"
 " 从第二层开始可视化显示缩进
 "let g:indent_guides_start_level=2
-
+"
 " 色块宽度
 "let g:indent_guides_size=1
-
+"
 " 快捷键 i 开/关缩进可视化
 ":nmap <silent> <Leader>i <Plug>IndentGuidesToggle
+
+" indentLine
+let g:indentLine_char = '┊'
 
 " 代码折叠
 " 基于缩进或语法进行代码折叠,indent-基于缩进折叠,syntax-基于语法进行折叠,diff-未更改文本折叠,manual-手动建立折叠
