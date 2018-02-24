@@ -1,0 +1,221 @@
+" ==========================================
+" bundle 插件管理和配置项
+" ==========================================
+
+"------------------------------------------- begin of configs --------------------------------------------
+
+" ################### 插件管理 ###################
+
+if !exists('g:bundle_groups')
+    let g:bundle_groups=['javascript', 'typescript', 'html', 'css', 'less', 'sass', 'python', 'markdown']
+endif
+
+" ----------------------------------------------------------------------------
+" 使用 vim-plug 管理插件
+" vim plugin bundle control, command model
+" ----------------------------------------------------------------------------
+
+call plug#begin()
+
+Plug 'altercation/vim-colors-solarized'
+
+"Plug 'tomasr/molokai'
+
+"Plug 'vim-scripts/phd'
+
+" Plug 'Lokaltog/vim-powerline'
+
+" Plug 'powerline/powerline'
+
+Plug 'vim-airline/vim-airline'
+
+Plug 'vim-airline/vim-airline-themes'
+
+"Plug 'nathanaelkane/vim-indent-guides'
+
+" icon
+Plug 'ryanoasis/vim-devicons'
+
+" icon color
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
+" 缩进线
+Plug 'Yggdroot/indentLine'
+
+" 书签可视化
+Plug 'kshenoy/vim-signature'
+
+" 让书签高亮
+Plug 'vim-scripts/BOOKMARKS--Mark-and-Highlight-Full-Lines'
+
+" 基于标签的标识符列表插件
+Plug 'majutsushi/tagbar'
+
+" 如何自动生成标签并引入
+Plug 'vim-scripts/indexer.tar.gz'
+" 上面插件依赖下面两个插件
+Plug 'vim-scripts/DfrankUtil'
+Plug 'vim-scripts/vimprj'
+
+" 上下文插件，例如搜索到关键字，中间缩略，展示一段上下文
+Plug 'dyng/ctrlsf.vim', { 'on': ['CtrlSF', 'CtrlSFVwordPath'] }
+
+" 多光标编辑功能
+Plug 'terryma/vim-multiple-cursors'
+
+" 快速开关注释
+Plug 'scrooloose/nerdcommenter'
+
+" ASCII art风格的注释
+"Plug 'vim-scripts/DrawIt'
+
+" 模板补全插件
+Plug 'SirVer/ultisnips', { 'for': ['javascript.jsx', 'typesript', 'html', 'css', 'less', 'sass'] }
+
+" 随键而全的、支持模糊搜索的、高速补全的插件
+Plug 'Valloric/YouCompleteMe', { 'for': ['javascript.jsx', 'typesript', 'css', 'less', 'sass'] }
+
+" 根据类声明自动生成类实现的代码框架
+" Plug 'derekwyatt/vim-protodef'
+
+" 查看文件列表
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+
+" 显示多个buffer对应的window
+" Plug 'fholgado/minibufexpl.vim'
+
+" 快捷键选中'<>','[]','{}'中间的内容
+" 这个与自动以快捷键冲突
+Plug 'gcmt/wildfire.vim'
+
+" 有机会撤销最近一步或多不操作
+Plug 'sjl/gundo.vim'
+
+" 快速移动,两次'<Leader>'作为前缀键
+Plug 'Lokaltog/vim-easymotion'
+
+" 编辑markdown文档，自动开启firefox为你显示markdown最终效果
+"Plug 'suan/vim-instant-markdown'
+
+" 中/英输入平滑切换
+"Plug 'lilydjwg/fcitx.vim'
+
+" 支持大多数语言代码高亮
+Plug 'sheerun/vim-polyglot'
+
+" html5
+Plug 'othree/html5.vim'
+
+" 文件搜索
+Plug 'wincent/command-t'
+
+" 显示git diff 和 stages/undoes 片段
+Plug 'airblade/vim-gitgutter'
+
+" 解决中文输入法下面无法使用命令
+" Plug 'ybian/smartim'
+
+" 语法高亮多种知名JS库
+Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript.jsx', 'typescript'] }
+
+" React jsx 语法高亮
+"Plug 'mxw/vim-jsx'
+
+" 提供快速编写xml/html的能力，如标签自动闭合等
+Plug 'othree/xml.vim'
+
+" 实时显示颜色的功能，如#FFFFFF
+Plug 'cakebaker/scss-syntax.vim', { 'for': ['css', 'less', 'sass'] }
+
+" css3 高亮，包括stylus,Less,Sass
+Plug 'hail2u/vim-css3-syntax', { 'for': ['css', 'less', 'sass'] }
+
+" 文件转换 .h 和 .cpp
+" Plug 'derekwyatt/vim-fswitch'
+
+" JavaScript 语法(ES5 and ES6)
+"Plug 'othree/yajs.vim'
+
+" 可取代Command-T 但是现在不支持目录忽略
+"Plug 'junegunn/fzf'
+
+" 调用外部命令行工具来进行代码风格检查
+Plug 'scrooloose/syntastic', { 'for': ['javascript.jsx', 'typescript'] }
+
+" 调用外部命令行工具来格式化代码
+Plug 'Chiel92/vim-autoformat', { 'on': 'Autoformat'}
+
+" editorConfig
+Plug 'editorconfig/editorconfig-vim'
+
+" typescript
+"Plug 'leafgarland/typescript-vim'
+"Plug ''
+
+" JavaScript函数定义与跳转
+Plug 'ternjs/tern_for_vim', { 'for': ['javascript.jsx', 'typescript'] }
+
+" 括号配对
+Plug 'Raimondi/delimitMate'
+
+" emmet语法
+Plug 'mattn/emmet-vim', { 'for': ['javascript.jsx', 'typescript', 'html', 'css']}
+
+" 初始屏幕显示内容
+Plug 'mhinz/vim-startify'
+
+if count(g:bundles_groups, 'markdown')
+    Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+endif
+
+if count(g:bundles_groups, 'golang')
+    Plug 'fatih/vim-go', { 'for': 'go' }
+endif
+
+if count(g:bundles_groups, 'python')
+    Plug 'hdima/python-syntax', { 'for': 'python' }
+    Plug 'hynek/vim-python-pep8-indent'
+    Plug 'Flench/Vim-Jinja2-Syntax'
+    Plug 'flsadev/vim-isort'
+    " Shift-V 上下选中, ctrl-i 规范化
+    let g:vim_isort_map='<C-i>'
+endif
+
+if count(g:bundles_groups, 'javascript')
+    Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript.jsx', 'typescript']}
+endif
+
+
+call plug#end()
+
+" ################### 基础 ######################
+
+
+" ################### 自动补全 ###################
+
+
+" ################### 快速编码 ###################
+
+
+" ################### 快速移动 ###################
+
+
+" ################### 快速选中 ###################
+
+
+" ################### 功能相关 ###################
+
+
+" ################### 显示增强 ###################
+
+" ################### 显示增强-主题 ##############
+
+" ################### 快速导航 ###################
+
+" ################### 语言相关 ###################
+
+
+" ####### temp #######
+
+
+"------------------------------------------- end of configs --------------------------------------------
