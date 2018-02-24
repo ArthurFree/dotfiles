@@ -1,85 +1,16 @@
+"===========================================================
+" Author: lvcheng
+" Email: cheng.lv@bkjk.com
+" Last_modufy: 2018-2-23
+"===========================================================
+
+set encoding=utf8
+
 " 让配置变更立即生效
 autocmd BufWritePost $MYVIMRC source $MYVIMRC
 
 " 定义快捷键的前缀，即<Leader>
 let mapleader=";"
-
-" ===============================================================
-"
-" vim键盘映射
-"
-" vim五种映射
-" 1. 普通模式
-" 2. 可视模式
-" 3. 操作符等待模式
-" 4. 插入模式/替换模式
-" 5. 命令行模式
-"
-" 命令组合前缀
-" nore - 表示非递归的映射
-" n - 表示普通模式下生效
-" v - 表示在可视莫斯下生效
-" i - 表示在插入模式下生效
-" c - 表示在命令行模式下生效
-"
-" 普通模式的映射命令
-" 1. :map {lhs} {rhs}
-"    在:map作用的模式中把键{lhs}映射为{rhs}，{rhs}可进行递归映射
-" 2. :noremap ts td
-"    与:map命令相同，但是{rhs}不能进行递归映射
-" 3. :unmap td
-"    取消:map绑定的{lhs}
-" 4. mapclear
-"    取消所有:map绑定
-"
-" 只用于普通模式的
-" 1. :nmap
-"    :nmap是:map的普通模式版，绑定的键只作用于普通模式
-" 2. :nnoremap
-"    :nnoremap是:nmap的非递归版本
-" 3. :nunmap
-"    :nunmap是取消:nmap的绑定
-" 4. :nmapclear
-"    取消所有:nmap的绑定
-" 
-" {rhs}之前可能显示一个特殊字符
-" * - 表示不可重映射
-" & - 表示仅脚本的局部映射可以被重映射
-" @ - 表示缓冲区的局部映射
-"
-" 键表
-" <k0> - <k9> - 表示小键盘的0-9
-" <S-...> - 表示Shift + 某键
-" <C-...> - 表示Ctrl + 某键
-" <M-...> - 表示Alt/meta + 某键
-" <A-...> - 同<M-...>
-" <Esc> - esc键
-" <Up> - 光标上移键
-" <Space> - 插入空格
-" <Tab> - 插入Tab
-" <CR> - 等于<Enter>
-"
-" <buffer> - 如果映射命令的一个参数是<buffer>，映射将值局限于当前缓冲区内
-" <silent> - 指执行键绑定时不再命令行上回显
-" <special> - 一般用于定义特殊键怕有副作用场合
-" <expr> -
-" 如果定义新映射的第一个参数是<expr>，那么参数会作为表达式来进行计算，结果使用实际使用的
-" <unique> -
-" 一般用于定义新的键映射或缩写命令的同时检查是否该键已经被映射，如果该映射或者缩写已经存在，则该命令会失败
-" <Leader>和mapleader
-" mapleader对所有map映射命令起效，它的作用是将参数<leader>替换成mapleader变量的值
-" 
-" <LocalLeader>和maplocalleader
-" <LocalLeader>和<Leader>相似，只是作用域缓冲区
-"
-" ===============================================================
-"
-" vim下终端使用方法
-" 1. vim -> <C-z> -> terminal, terminal -> fg -> vim
-" 2. vim -> :!    -> terminal, terminal -> <Enter> -> vim
-" 3. tumx
-"
-" ===============================================================
 
 " 开启文件类型侦测
 filetype on
@@ -133,7 +64,7 @@ nmap <Leader>M %
 syntax enable
 " 允许用指定语法高亮配色方案替换默认方案
 syntax on
-" se t_Co=256
+se t_Co=256
 let g:solarized_termcolors=16
 " solarized 设置
 " let g:solarized_visibility='high'
@@ -142,10 +73,14 @@ let g:solarized_termcolors=16
 let g:solarized_termtrans=1
 " 设置solarized风格为dark
 set background=dark
+" set background=light
 colorscheme solarized
 
 " 字体
-set guifont=YaHei\ Consolas\ Hybrid\ 11.5
+" set guifont=YaHei\ Consolas\ Hybrid\ 11.5
+" set guifont=IosevkaCC\ Slab
+set guifont=DroidSansMono\ Nerd\ Font\ 11
+" set guifont=Source\ Code\ Pro\ for\ Powerline:h16
 
 " 开启实时搜索功能
 set incsearch
@@ -158,6 +93,27 @@ set nocompatible
 
 " vim自身命令行模式智能补全
 set wildmenu
+
+" 禁用鼠标
+set mouse-=a
+
+" 启用鼠标
+" set nouse=a
+
+" 改变终端的title
+set title
+
+" 去掉输入错误的提示声音
+set novisualbell
+set noerrorbells
+set t_vb=
+set tm=500
+
+" 括号配对情况，跳转并高亮一下匹配的括号
+set showmatch
+
+" How many tenths of a second to blink when matching brackets
+set matchtime=2
 
 " 在上下移动光标时，光标的上方或下方至少会保留显示的行数
 " 总在中间
@@ -224,149 +180,199 @@ set confirm
 " 设置自动缩进，vim使用自动对齐，也就是把当前行的对齐格式应用到下一行(自动缩进)
 set autoindent
 
+" Smart indent
+set smartindent
+
 " cindent是特别针对c语言语法的自动缩进
 set cindent
 
 " 依据上面的对齐格式，智能的选择对齐方式，对于类似C语言编写有用
 
 " vundle 环境配置
-filetype off
+" filetype off
+"
+" set rtp+=~/.vim/bundle/Vundle.vim
+"
+" call vundle#begin()
+" call vundle#end()
 
-set rtp+=~/.vim/bundle/Vundle.vim
+" vim-plug 管理的插件列表必须位于 vundle#begin() 和 vundle#end() 之间
+call plug#begin()
 
-" vundle 管理的插件列表必须位于 vundle#begin() 和 vundle#end() 之间
-call vundle#begin()
+" Plug 'VundleVim/Vundle.vim'
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'altercation/vim-colors-solarized'
-"Plugin 'tomasr/molokai'
-"Plugin 'vim-scripts/phd'
-Plugin 'Lokaltog/vim-powerline'
-"Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'Yggdroot/indentLine'
+Plug 'altercation/vim-colors-solarized'
+
+"Plug 'tomasr/molokai'
+
+"Plug 'vim-scripts/phd'
+
+" Plug 'Lokaltog/vim-powerline'
+
+" Plug 'powerline/powerline'
+
+Plug 'vim-airline/vim-airline'
+
+Plug 'vim-airline/vim-airline-themes'
+
+"Plug 'nathanaelkane/vim-indent-guides'
+
+" icon
+Plug 'ryanoasis/vim-devicons'
+
+" icon color
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
+" 缩进线
+Plug 'Yggdroot/indentLine'
 
 " 书签可视化
-Plugin 'kshenoy/vim-signature'
+Plug 'kshenoy/vim-signature'
 
 " 让书签高亮
-Plugin 'vim-scripts/BOOKMARKS--Mark-and-Highlight-Full-Lines'
+Plug 'vim-scripts/BOOKMARKS--Mark-and-Highlight-Full-Lines'
 
 " 基于标签的标识符列表插件
-Plugin 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
 
 " 如何自动生成标签并引入
-Plugin 'vim-scripts/indexer.tar.gz'
+Plug 'vim-scripts/indexer.tar.gz'
 " 上面插件依赖下面两个插件
-Plugin 'vim-scripts/DfrankUtil'
-Plugin 'vim-scripts/vimprj'
+Plug 'vim-scripts/DfrankUtil'
+Plug 'vim-scripts/vimprj'
 
 " 上下文插件，例如搜索到关键字，中间缩略，展示一段上下文
-Plugin 'dyng/ctrlsf.vim'
+Plug 'dyng/ctrlsf.vim', { 'on': ['CtrlSF', 'CtrlSFVwordPath'] }
 
 " 多光标编辑功能
-Plugin 'terryma/vim-multiple-cursors'
+Plug 'terryma/vim-multiple-cursors'
 
 " 快速开关注释
-Plugin 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdcommenter'
 
 " ASCII art风格的注释
-Plugin 'vim-scripts/DrawIt'
+"Plug 'vim-scripts/DrawIt'
 
 " 模板补全插件
-Plugin 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips', { 'for': ['javascript.jsx', 'typesript', 'html', 'css', 'less', 'sass'] }
 
 " 随键而全的、支持模糊搜索的、高速补全的插件
-Plugin 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe', { 'for': ['javascript.jsx', 'typesript', 'css', 'less', 'sass'] }
 
 " 根据类声明自动生成类实现的代码框架
-Plugin 'derekwyatt/vim-protodef'
+" Plug 'derekwyatt/vim-protodef'
 
 " 查看文件列表
-Plugin 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 " 显示多个buffer对应的window
-Plugin 'fholgado/minibufexpl.vim'
+" Plug 'fholgado/minibufexpl.vim'
 
 " 快捷键选中'<>','[]','{}'中间的内容
 " 这个与自动以快捷键冲突
-Plugin 'gcmt/wildfire.vim'
+Plug 'gcmt/wildfire.vim'
 
 " 有机会撤销最近一步或多不操作
-Plugin 'sjl/gundo.vim'
+Plug 'sjl/gundo.vim'
 
 " 快速移动,两次'<Leader>'作为前缀键
-Plugin 'Lokaltog/vim-easymotion'
+Plug 'Lokaltog/vim-easymotion'
 
 " 编辑markdown文档，自动开启firefox为你显示markdown最终效果
-"Plugin 'suan/vim-instant-markdown'
+"Plug 'suan/vim-instant-markdown'
 
 " 中/英输入平滑切换
-"Plugin 'lilydjwg/fcitx.vim'
+"Plug 'lilydjwg/fcitx.vim'
 
 " 支持大多数语言代码高亮
-Plugin 'sheerun/vim-polyglot'
+Plug 'sheerun/vim-polyglot'
+
+" html5
+Plug 'othree/html5.vim'
 
 " 文件搜索
-Plugin 'wincent/command-t'
+Plug 'wincent/command-t'
 
 " 显示git diff 和 stages/undoes 片段
-Plugin 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 
 " 解决中文输入法下面无法使用命令
-" Plugin 'ybian/smartim'
+" Plug 'ybian/smartim'
 
 " 语法高亮多种知名JS库
-Plugin 'othree/javascript-libraries-syntax.vim' 
+Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript.jsx', 'typescript'] }
 
 " React jsx 语法高亮
-"Plugin 'mxw/vim-jsx'
+"Plug 'mxw/vim-jsx'
 
 " 提供快速编写xml/html的能力，如标签自动闭合等
-Plugin 'othree/xml.vim'
+Plug 'othree/xml.vim'
 
 " 实时显示颜色的功能，如#FFFFFF
-Plugin 'cakebaker/scss-syntax.vim'
+Plug 'cakebaker/scss-syntax.vim', { 'for': ['css', 'less', 'sass'] }
 
 " css3 高亮，包括stylus,Less,Sass
-Plugin 'hail2u/vim-css3-syntax'
+Plug 'hail2u/vim-css3-syntax', { 'for': ['css', 'less', 'sass'] }
 
 " 文件转换 .h 和 .cpp
-" Plugin 'derekwyatt/vim-fswitch'
+" Plug 'derekwyatt/vim-fswitch'
 
 " JavaScript 语法(ES5 and ES6)
-"Plugin 'othree/yajs.vim'
+"Plug 'othree/yajs.vim'
 
 " 可取代Command-T 但是现在不支持目录忽略
-"Plugin 'junegunn/fzf'
+"Plug 'junegunn/fzf'
 
 " 调用外部命令行工具来进行代码风格检查
-Plugin 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic', { 'for': ['javascript.jsx', 'typescript'] }
 
 " 调用外部命令行工具来格式化代码
-Plugin 'Chiel92/vim-autoformat'
+Plug 'Chiel92/vim-autoformat', { 'on': 'Autoformat'}
 
 " editorConfig
-Plugin 'editorconfig/editorconfig-vim'
+Plug 'editorconfig/editorconfig-vim'
 
 " typescript
-"Plugin 'leafgarland/typescript-vim'
-"Plugin ''
+"Plug 'leafgarland/typescript-vim'
+"Plug ''
 
 " JavaScript函数定义与跳转
-Plugin 'ternjs/tern_for_vim'
+Plug 'ternjs/tern_for_vim', { 'for': ['javascript.jsx', 'typescript'] }
 
 " 括号配对
-Plugin 'Raimondi/delimitMate'
+Plug 'Raimondi/delimitMate'
+
+" emmet语法
+Plug 'mattn/emmet-vim', { 'for': ['javascript.jsx', 'typescript', 'html', 'css']}
+
+" 初始屏幕显示内容
+Plug 'mhinz/vim-startify'
 
 " 插件列表结束
-call vundle#end()
+call plug#end()
 
-filetype plugin indent on
+" filetype plugin indent on
 
 " 插件设置
 " powerline
 " 设置状态栏主题风格
-let g:Powerline_colorscheme='solarized256'
+" let g:Powerline_colorscheme='solarized256'
+let g:airline#extensions#tabline#enabled=1
+" let g:airline#extensions#tabline#left_sep = ' '
+" let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#buffer_nr_show=1
+" let g:airline#extensions#tabline#formatter='default'
+
+let g:airline_powerline_fonts=1
+" if !exists('g:airline_symbols')
+    " let g:airline_symbols={}
+" endif
+
+let g:airline_theme='jellybeans'
+" let g:airline_theme='solarized'
+" let g:airline_solarized_bg='dark'
+" let g:airline_theme='murmur'
+" let g:airline_them='base16_spacemacs'
 
 " vim-indent-guides
 " 随vim自启动
@@ -641,15 +647,15 @@ let NERDTreeAutoDeleteBuffer=1
 " 显示多个 buffer 对应的 window
 " Plug 'fholgado/minibufexpl.vim'
 " 显示/隐藏 MiniBufExplorer 窗口
-map <Leader>bl :MBEToggle<cr>
+" map <Leader>bl :MBEToggle<cr>
 
 " buffer 切换快捷键
 " map <C-Tab> :MBEbn<cr>
 " map <C-S-Tab> :MBEbp<cr>
-nnoremap <Leader>bn :MBEbn<cr>  " 正向遍历 buffer
-nnoremap <Leader>bp :MBEbp<cr>  " 逆向遍历（光标必须在 buffer 列表子窗口外）
-nnoremap <Leader>bd :MBEbd<cr>  " 关闭当前buffer（光标必须在 buffer 列表子窗口外）
-nnoremap <Leader>bb :b#<cr>     " 你之前所在的前一个 buffer）
+" nnoremap <Leader>bn :MBEbn<cr>  " 正向遍历 buffer
+" nnoremap <Leader>bp :MBEbp<cr>  " 逆向遍历（光标必须在 buffer 列表子窗口外）
+" nnoremap <Leader>bd :MBEbd<cr>  " 关闭当前buffer（光标必须在 buffer 列表子窗口外）
+" nnoremap <Leader>bb :b#<cr>     " 你之前所在的前一个 buffer）
 
 " 环境恢复
 
@@ -697,3 +703,5 @@ let g:syntastic_always_popultate_loc_list=1
 " 使用eslint规则进行代码格式化，使用eslint --fix
 let g:formatdef_eslint = '"SRC=eslint-temp-${RANDOM}.js; cat - >$SRC; eslint --fix $SRC >/dev/null 2>&1; cat $SRC | perl -pe \"chomp if eof\"; rm -f $SRC"'
 let g:formatters_javascript = ['eslint']
+
+let g:user_emmet_leader_key=';'
