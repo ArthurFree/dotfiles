@@ -199,8 +199,6 @@ set cindent
 " vim-plug 管理的插件列表必须位于 vundle#begin() 和 vundle#end() 之间
 call plug#begin()
 
-" Plug 'VundleVim/Vundle.vim'
-
 Plug 'altercation/vim-colors-solarized'
 
 "Plug 'tomasr/molokai'
